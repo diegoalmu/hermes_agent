@@ -80,10 +80,17 @@ docker compose version
 
 ## ✅ Checklist de la Fase 1
 
-- [ ] `git --version` responde correctamente.
-- [ ] `docker --version` responde correctamente.
-- [ ] `docker run hello-world` se ejecuta sin errores.
-- [ ] `docker compose version` responde correctamente.
-- [ ] Puedo correr `docker` sin escribir `sudo`.
+- [x] `git --version` responde correctamente (2.43.0).
+- [x] `docker --version` responde correctamente (Docker CE 29.7.2).
+- [x] `docker run hello-world` se ejecuta sin errores.
+- [x] `docker compose version` responde correctamente (v5.5.0).
+- [x] Puedo correr `docker` sin escribir `sudo`.
+- [x] `docker.service` está `active (running)` y habilitado en el arranque.
 
-Cuando termines esta fase, dime "listo fase 1" y seguimos con la **Fase 2: levantar el contenedor de Hermes y correr el asistente de configuración con OpenRouter**.
+## Nota especial de este entorno: Linux Mint
+
+Este equipo corre **Linux Mint** (basado en Ubuntu 24.04 "noble"), no Ubuntu puro. Docker **no publica** repositorios para los codenames de Mint (ej. `zena`), así que el repositorio de APT se configuró usando `$UBUNTU_CODENAME` (`noble`) en vez de `$VERSION_CODENAME` (`zena`). Si en el futuro hay que tocar `/etc/apt/sources.list.d/docker.list`, recordar usar siempre `noble`, no el codename de Mint.
+
+**Fase 1 completada el 30 de agosto de 2026.**
+
+Siguiente: **Fase 2 — Obtener clave de OpenRouter y levantar el contenedor de Hermes con el asistente de configuración (`hermes setup`)**. Ver `02-instalar-hermes-openrouter.md`.
