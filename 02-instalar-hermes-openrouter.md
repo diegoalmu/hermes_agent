@@ -213,7 +213,46 @@ docker run -d \
   nousresearch/hermes-agent gateway run
 ```
 
-**Estado al momento de esta actualización de bitácora:** contenedor recreado con IPv6 desactivado, esperando confirmación de que el gateway conecta correctamente a Telegram. *(Pendiente de confirmar en la próxima sesión de trabajo — ver `03-incidente-telegram-resolucion.md` si el problema requiere más pasos, o continuar directo con la Fase 3 si ya quedó resuelto.)*
+**Estado al momento de esta actualización de bitácora:** contenedor recreado con IPv6 desactivado, esperando confirmación de que el gateway conecta correctamente a Telegram.
+
+## Incidente 3 — Resolución final: causa raíz doble
+
+El incidente de Telegram no fue causado por un solo factor, sino por **dos problemas superpuestos** que se fueron descubriendo en capas:
+
+**Causa A — IPv6 roto en el contenedor.** Confirmada y resuelta con `--dns=8.8.8.8 --dns=1.1.1.1 --sysctl net.ipv6.conf.all.disable_ipv6=1` en el `docker run`.
+
+**Causa B — Contenedores duplicados compitiendo por el mismo token.** Después de varias recreaciones del contenedor (`docker rm -f hermes` + `docker run` de nuevo) sin limpiar antes los contenedores viejos, terminaron **dos procesos de Hermes corriendo al mismo tiempo**, ambos intentando hacer `getUpdates` con el mismo `TELEGRAM_BOT_TOKEN`. Telegram solo permite un proceso por token, así que el segundo (o ambos) entraban en un ciclo de:
+```
+[Telegram] Telegram polling conflict (1/5) — previous session still held open on Telegram's servers...
+```
+Esto a veces coincidía además con un corte de DNS puntual dentro del contenedor (`Temporary failure in name resolution`), lo que hacía más confuso el diagnóstico.
+
+**Lección aprendida (clave para la bitácora/portafolio):** al recrear un contenedor con `docker run --name hermes`, si el nombre ya existe Docker da error y no lo deja crear — pero si en algún punto se usó un nombre distinto o el contenedor viejo no se eliminó bien, pueden quedar **instancias huérfanas** corriendo en segundo plano sin darse cuenta. Antes de cualquier troubleshooting de conexión a una plataforma de mensajería, **siempre verificar primero cuántos contenedores de la imagen existen**:
+```bash
+docker ps -a --filter ancestor=nousresearch/hermes-agent
+```
+y limpiar todos antes de levantar uno nuevo:
+```bash
+docker rm -f $(docker ps -a --filter ancestor=nousresearch/hermes-agent -q)
+```
+
+**Regla operativa adoptada:** nunca abrir un `docker run -it` o `docker exec -it hermes hermes` interactivo mientras el contenedor `gateway run` esté activo — eso crea un segundo proceso compitiendo por el mismo token. Para chatear con el agente, usar siempre Telegram/WhatsApp; para depurar, usar solo `docker logs -f hermes` (solo lectura, no abre sesión nueva).
+
+**Confirmación final (31 de agosto de 2026, sesión nueva del día siguiente):**
+```bash
+newgrp docker   # la terminal nueva no heredaba el grupo docker; se reactivó
+docker rm -f $(docker ps -a --filter ancestor=nousresearch/hermes-agent -q)   # se encontraron y eliminaron 2 contenedores viejos
+docker run -d --name hermes --restart unless-stopped \
+  --dns=8.8.8.8 --dns=1.1.1.1 \
+  --sysctl net.ipv6.conf.all.disable_ipv6=1 \
+  -v ~/.hermes:/opt/data -p 8642:8642 \
+  nousresearch/hermes-agent gateway run
+```
+Resultado: log limpio (sin `Conflict`, sin errores de DNS), un solo contenedor activo (`docker ps -a` confirma únicamente `hermes`, `Up`), y respuesta exitosa del bot en Telegram:
+> Diego: "¿ya estás funcionando bien ahora?"
+> Leonardo: "Sí, funcionando con normalidad. ¿Hay algo en lo que te pueda ayudar?"
+
+✅ **Incidente cerrado.**
 
 ### Checklist actualizado de la Fase 2
 
@@ -226,7 +265,7 @@ docker run -d \
 - [x] Proveedor de búsqueda (Tavily), navegador (Local Browser), TTS (Gemini) y visión (Auto) configurados.
 - [x] `hermes doctor` sin issues pendientes (symlink corregido).
 - [x] Prueba de chat CLI directo exitosa, modelo confirmado.
-- [ ] **Pendiente:** confirmar que el gateway 24/7 responde correctamente en Telegram (incidente de conexión en resolución).
+- [x] Gateway 24/7 confirmado funcionando correctamente en Telegram (incidente de conexión + contenedores duplicados resuelto).
 - [ ] Pendiente: confirmar respuesta en WhatsApp.
 
-Cuando el gateway quede confirmado funcionando en Telegram, seguimos con la **Fase 3: configuración fina de WhatsApp y preparación de los sub-agentes (`coder` y `oficina`)**.
+Siguiente: **Fase 3 — Crear los sub-agentes (perfiles) `coder` y `oficina`.**
