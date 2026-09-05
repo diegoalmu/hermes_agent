@@ -101,8 +101,11 @@ Hermes **bloquea por diseño** el dashboard sin autenticación cuando se expone 
 
 ### Alcance actual y nota de seguridad
 
-- Acceso **solo dentro de la red WiFi doméstica** — el puerto 9119 **no** se abrió en el router hacia internet, para no exponer el panel (y por extensión el `.env`) a escaneos públicos.
-- Alternativa ya identificada para acceso remoto seguro sin abrir puertos: usar la IP de **Tailscale** de esta PC (`100.78.159.127`) en vez de la IP local — pendiente de implementar si se necesita acceso fuera de casa.
+- Acceso confirmado por **dos rutas**, sin necesidad de configuración adicional (Docker expone el puerto `9119` en todas las interfaces de red de la PC por diseño):
+  - **Red WiFi doméstica:** `http://192.168.1.12:9119`
+  - **Tailscale (tailnet propio):** `http://100.78.159.127:9119` — probado desde un dispositivo externo, login exitoso.
+- Decisión tomada: mantener **ambos accesos activos** (no restringir solo a Tailscale). El puerto 9119 sigue sin abrirse hacia el router/internet público — solo alcanzable desde la LAN de casa o desde dispositivos de la propia tailnet.
+- Alternativa disponible si más adelante se quiere restringir solo a Tailscale: hacer binding explícito del puerto a la IP de Tailscale en el `docker run` (`-p 100.78.159.127:9119:9119` en vez de `-p 9119:9119`), lo que eliminaría el acceso por WiFi local. No aplicado por decisión del usuario.
 
 ---
 
@@ -114,6 +117,6 @@ Hermes **bloquea por diseño** el dashboard sin autenticación cuando se expone 
 - [ ] Pendiente: pruebas formales de delegación en Telegram (casos de programación y de oficina).
 - [x] Dashboard web habilitado en puerto 9119 con autenticación básica.
 - [x] Login al dashboard confirmado exitoso desde la red local.
-- [ ] Pendiente (opcional): exponer el dashboard vía Tailscale para acceso remoto sin abrir puertos.
+- [x] Acceso remoto vía Tailscale confirmado (`http://100.78.159.127:9119`), sin necesidad de configuración adicional — se decidió mantener ambos accesos (WiFi local + Tailscale).
 
 Siguiente: probar la delegación coder/oficina con casos reales, y decidir si se implementa acceso remoto vía Tailscale al dashboard.
