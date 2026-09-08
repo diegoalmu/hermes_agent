@@ -20,17 +20,25 @@ Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo pa
 
 | Ítem | Valor |
 |---|---|
-| Máquina | PC local con Linux |
-| Método de despliegue | Docker (imagen oficial `nousresearch/hermes-agent`) |
-| Proveedor de modelo (LLM) | OpenRouter, modelo gratuito `:free` (ej. NVIDIA Nemotron 3 Ultra) |
-| Canal de comunicación | Telegram (a configurar en fase posterior) |
-| Sub-agentes (perfiles) | `coder`, `oficina` |
+| Máquina | PC con **Windows 11 + WSL2** (Ubuntu real, disco `D:`) — migrado desde Linux Mint en la Fase 5 |
+| Método de despliegue | Docker (dentro de la Ubuntu de WSL2), imagen oficial `nousresearch/hermes-agent` |
+| Proveedor de modelo (LLM) | NVIDIA NIM (`nvidia/nemotron-3-ultra-550b-a55b`) |
+| Canal de comunicación | Telegram (bot "Leonardo", `@hermes_asiste_bot`) |
+| Sub-agentes (skills) | `coder`, `oficina` (delegación vía `delegate_task` desde `SOUL.md`) |
+| Dashboard web | Puerto 9119, accesible por WiFi local y por Tailscale |
+| Automatizaciones activas | 3 recordatorios de clase (Lun/Mar/Mié) + 2 de tutoría Infotec |
 
 ## Índice de fases
 
 - [`fases/00-plan-proyecto.md`](fases/00-plan-proyecto.md) — Plan general y arquitectura.
-- [`fases/01-prerrequisitos-y-docker.md`](fases/01-prerrequisitos-y-docker.md) — Fase 0: prerrequisitos e instalación de Docker.
-- _(Las siguientes fases se irán agregando aquí conforme avancemos: instalación de Hermes, configuración de Telegram, creación de sub-agentes, docker-compose final, pruebas.)_
+- [`fases/01-prerrequisitos-y-docker.md`](fases/01-prerrequisitos-y-docker.md) — Prerrequisitos e instalación de Docker (Linux Mint, fase histórica).
+- [`fases/02-instalar-hermes-openrouter.md`](fases/02-instalar-hermes-openrouter.md) — Instalación de Hermes, elección de NVIDIA NIM, incidentes de red resueltos.
+- [`fases/03-subagentes-y-dashboard.md`](fases/03-subagentes-y-dashboard.md) — Skills `coder`/`oficina` y Dashboard web (WiFi + Tailscale).
+- [`fases/04-recordatorios-clases.md`](fases/04-recordatorios-clases.md) — Cron jobs de recordatorios de clase.
+- [`fases/05-migracion-windows-wsl2.md`](fases/05-migracion-windows-wsl2.md) — Migración de Linux Mint a Windows/WSL2, reconstrucción completa de Hermes, bug de permisos por UID.
+- [`fases/06-persistencia-wsl2-hermes.md`](fases/06-persistencia-wsl2-hermes.md) — Solución para mantener WSL2/Docker/Hermes vivos sin depender de una terminal abierta.
+
+> ⚠️ **Nota histórica:** las Fases 0-4 se hicieron originalmente sobre Linux Mint. La Fase 5 documenta la migración completa a Windows + WSL2, incluyendo la reconstrucción de Hermes desde cero (se perdió la memoria/configuración anterior por un backup mal ejecutado — lección documentada en esa fase). El entorno **actual y vigente** del proyecto es Windows + WSL2.
 
 ## Cómo subir esta carpeta a GitHub
 
