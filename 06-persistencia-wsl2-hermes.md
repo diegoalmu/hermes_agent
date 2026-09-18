@@ -16,7 +16,7 @@ Confirmado con `wsl -l -v` desde PowerShell: la distro Ubuntu pasaba a `Stopped`
 
 2. **Revisar perfiles "fantasma" de Ubuntu en Windows Terminal** — se encontró un perfil viejo marcado como "ya no detectado" (de una distro anterior, reimportada a `D:`), pero era basura inofensiva, no la causa del apagado. Se eliminó por limpieza.
 
-3. **Tarea programada de Windows con la cuenta del propio usuario (`diego`)** — falló porque la cuenta es de tipo Microsoft en línea (`diego1384@hotmail.com`), y el modo "ejecutar tanto si el usuario inició sesión como si no" requiere su contraseña real de Microsoft (no el PIN de Windows Hello), la cual no se tenía a la mano.
+3. **Tarea programada de Windows con la cuenta del propio usuario (`diego`)** — falló porque la cuenta es de tipo Microsoft en línea (`tu_correo_personal@ejemplo.com`), y el modo "ejecutar tanto si el usuario inició sesión como si no" requiere su contraseña real de Microsoft (no el PIN de Windows Hello), la cual no se tenía a la mano.
 
 4. **Tarea programada con la cuenta `NT AUTHORITY\SYSTEM`** — evitó el problema de la contraseña, pero la tarea fallaba con código `0xFFFFFFFF` al ejecutarse. Causa: **WSL2 depende de un servicio (`LxssManager`) ligado a una sesión de usuario real con escritorio — no funciona correctamente lanzado desde la cuenta `SYSTEM`.**
 
