@@ -7,7 +7,7 @@
 - 🧑‍💻 **`coder`** — programación, git, debugging, deploys.
 - 🗂️ **`oficina`** — documentos, reportes, correo, tareas administrativas.
 
-Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo para escuela/portafolio profesional). Cada paso ejecutado, cada comando y cada decisión quedan documentados en Markdown dentro de `fases/`.
+Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo para escuela/portafolio profesional). Cada paso ejecutado, cada comando y cada decisión quedan documentados en los archivos Markdown numerados en la raíz de este repositorio.
 
 ## Fuentes oficiales usadas
 
@@ -30,15 +30,33 @@ Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo pa
 
 ## Índice de fases
 
-- [`fases/00-plan-proyecto.md`](fases/00-plan-proyecto.md) — Plan general y arquitectura.
-- [`fases/01-prerrequisitos-y-docker.md`](fases/01-prerrequisitos-y-docker.md) — Prerrequisitos e instalación de Docker (Linux Mint, fase histórica).
-- [`fases/02-instalar-hermes-openrouter.md`](fases/02-instalar-hermes-openrouter.md) — Instalación de Hermes, elección de NVIDIA NIM, incidentes de red resueltos.
-- [`fases/03-subagentes-y-dashboard.md`](fases/03-subagentes-y-dashboard.md) — Skills `coder`/`oficina` y Dashboard web (WiFi + Tailscale).
-- [`fases/04-recordatorios-clases.md`](fases/04-recordatorios-clases.md) — Cron jobs de recordatorios de clase.
-- [`fases/05-migracion-windows-wsl2.md`](fases/05-migracion-windows-wsl2.md) — Migración de Linux Mint a Windows/WSL2, reconstrucción completa de Hermes, bug de permisos por UID.
-- [`fases/06-persistencia-wsl2-hermes.md`](fases/06-persistencia-wsl2-hermes.md) — Solución para mantener WSL2/Docker/Hermes vivos sin depender de una terminal abierta.
+- [`00-plan-proyecto.md`](00-plan-proyecto.md) — Plan general y arquitectura.
+- [`01-prerrequisitos-y-docker.md`](01-prerrequisitos-y-docker.md) — Prerrequisitos e instalación de Docker (Linux Mint, fase histórica).
+- [`02-instalar-hermes-openrouter.md`](02-instalar-hermes-openrouter.md) — Instalación de Hermes, elección de NVIDIA NIM, incidentes de red resueltos.
+- [`03-subagentes-y-dashboard.md`](03-subagentes-y-dashboard.md) — Skills `coder`/`oficina` y Dashboard web (WiFi + Tailscale).
+- [`04-recordatorios-clases.md`](04-recordatorios-clases.md) — Cron jobs de recordatorios de clase.
+- [`05-migracion-windows-wsl2.md`](05-migracion-windows-wsl2.md) — Migración de Linux Mint a Windows/WSL2, reconstrucción completa de Hermes, bug de permisos por UID.
+- [`06-persistencia-wsl2-hermes.md`](06-persistencia-wsl2-hermes.md) — Solución para mantener WSL2/Docker/Hermes vivos sin depender de una terminal abierta.
+- [`07-pendientes-trabajo.md`](07-pendientes-trabajo.md) — Lista de pendientes de trabajo con memoria persistente y aviso diario.
+- [`08-whatsapp-y-notificaciones.md`](08-whatsapp-y-notificaciones.md) — Conexión de WhatsApp como canal adicional y diagnóstico de notificaciones.
+- [`09-incidente-proveedor-y-memoria.md`](09-incidente-proveedor-y-memoria.md) — Caída del proveedor de LLM, migración a otro proveedor y limpieza de memoria.
 
 > ⚠️ **Nota histórica:** las Fases 0-4 se hicieron originalmente sobre Linux Mint. La Fase 5 documenta la migración completa a Windows + WSL2, incluyendo la reconstrucción de Hermes desde cero (se perdió la memoria/configuración anterior por un backup mal ejecutado — lección documentada en esa fase). El entorno **actual y vigente** del proyecto es Windows + WSL2.
+
+## Cómo instalarlo
+
+Este repositorio es una bitácora en Markdown, no una aplicación por sí misma. Para reproducir el entorno que documenta:
+
+1. Sigue [`01-prerrequisitos-y-docker.md`](01-prerrequisitos-y-docker.md) para instalar Docker sobre Linux o WSL2.
+2. Sigue [`02-instalar-hermes-openrouter.md`](02-instalar-hermes-openrouter.md) para instalar el [Hermes Agent](https://github.com/NousResearch/hermes-agent) oficial de Nous Research dentro de Docker.
+3. Continúa con las fases siguientes en orden según lo que quieras reproducir (sub-agentes, cron jobs, WhatsApp, persistencia en WSL2, etc.).
+
+## Cómo configurarlo
+
+La configuración de Hermes (proveedor de modelo, tokens de Telegram/WhatsApp, usuarios permitidos) vive en `~/.hermes/.env` dentro del contenedor/host donde corre Hermes, **no en este repositorio**. Ningún archivo de este repo contiene credenciales reales; los IDs, tokens y direcciones IP que aparecían en los ejemplos fueron reemplazados por placeholders. Para tu propia instalación:
+
+1. Copia la estructura de variables mencionada en cada fase (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_ALLOWED_USERS`, `TELEGRAM_HOME_CHANNEL`, etc.) a tu propio `~/.hermes/.env`.
+2. Sustituye cada placeholder por tus propios valores (obtenidos de `@BotFather`, `@userinfobot`, tu propia red de Tailscale, etc.).
 
 ## Cómo subir esta carpeta a GitHub
 
