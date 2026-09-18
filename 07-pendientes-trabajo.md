@@ -29,14 +29,14 @@ Archivo: `~/.hermes/skills/pendientes-trabajo/SKILL.md`. Instruye a Leonardo a:
 Agrega estos pendientes de trabajo a tu memoria, la numeración no es por
 importancia, sino para separarlos, tenia que saber cuales son algunos de
 mis pendientes de la oficina
-1. Recoger llanta montacargas 3 Guerras
-2. Entregar luminarias AVEMEX
-3. Regresar la llanta del montacargas a Advance
-4. Recolectar paquetexpress 4 luminarias para Hidrosina
-5. Comprobantes de pago 3 Guerras de 3 facturas
-6. imprimir facturas y OC de Hidrosina
-7. entregar todas las luminarias de Hidrosina
-8. recoger 10 luminarias de hidroinas en paquetexpress
+1. Recoger llanta montacargas [Cliente A]
+2. Entregar luminarias [Cliente B]
+3. Regresar la llanta del montacargas a [Proveedor X]
+4. Recolectar paquetexpress 4 luminarias para [Cliente C]
+5. Comprobantes de pago [Cliente A] de 3 facturas
+6. imprimir facturas y OC de [Cliente C]
+7. entregar todas las luminarias de [Cliente C]
+8. recoger 10 luminarias de [Cliente C] en paquetexpress
 ```
 
 Respuesta de Leonardo: confirmó el guardado de los 8 pendientes en memoria.
