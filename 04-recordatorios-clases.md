@@ -116,11 +116,11 @@ Se recrearon los 5 jobs (borrado + creación con el mismo nombre y horario) para
 
 | Job | Día(s) | Aviso | Link incluido |
 |---|---|---|---|
-| Recordatorio-ProgramacionEstructurada | Lunes | 18:45 | Zoom: https://cuaed-unam-mx.zoom.us/j/5082170959 |
-| Recordatorio-CalculoDiferencial | Martes | 18:45 | Meet: https://meet.google.com/ywz-cwwn-czq |
-| Recordatorio-DesarrolloSostenible | Miércoles | 20:15 | Meet: https://meet.google.com/wuc-txak-ewr |
-| Tutoria-Infotec-LunesMiercoles | Lunes y Miércoles | 17:45 | Meet: meet.google.com/rqy-yhrg-akt |
-| Tutoria-Infotec-Sabado | Sábado | 11:45 | Meet: meet.google.com/rqy-yhrg-akt |
+| Recordatorio-ProgramacionEstructurada | Lunes | 18:45 | Zoom: [enlace de Zoom de la clase] |
+| Recordatorio-CalculoDiferencial | Martes | 18:45 | Meet: [enlace de Meet de la clase] |
+| Recordatorio-DesarrolloSostenible | Miércoles | 20:15 | Meet: [enlace de Meet de la clase] |
+| Tutoria-Infotec-LunesMiercoles | Lunes y Miércoles | 17:45 | Meet: [enlace de Meet de la tutoría] |
+| Tutoria-Infotec-Sabado | Sábado | 11:45 | Meet: [enlace de Meet de la tutoría] |
 
 **Nota:** al recrear los jobs, sus `job_id` cambiaron (Hermes genera uno nuevo en cada `cron create`). Los nombres (`--name`) se mantuvieron idénticos para no perder continuidad en la bitácora.
 

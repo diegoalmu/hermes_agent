@@ -159,8 +159,8 @@ Se creó el bot manualmente vía `@BotFather`:
 - Nombre visible: **Leonardo**
 - Username: **`@hermes_asiste_bot`**
 - Token guardado en `~/.hermes/.env` como `TELEGRAM_BOT_TOKEN`.
-- Acceso restringido solo al ID de Telegram del propietario: `TELEGRAM_ALLOWED_USERS=1014483047` (obtenido con `@userinfobot`).
-- `TELEGRAM_HOME_CHANNEL=1014483047` (chat personal como canal por defecto de notificaciones).
+- Acceso restringido solo al ID de Telegram del propietario: `TELEGRAM_ALLOWED_USERS=tu_id_de_telegram_aqui` (obtenido con `@userinfobot`).
+- `TELEGRAM_HOME_CHANNEL=tu_id_de_telegram_aqui` (chat personal como canal por defecto de notificaciones).
 
 `hermes setup` terminó exitosamente. `hermes doctor` inicial reportó **1 solo issue real** (`~/.local/bin/hermes` symlink faltante), corregido con `hermes doctor --fix`. El resto de advertencias (`⚠`) correspondían a proveedores/plataformas que no se activaron a propósito (OpenRouter, Discord, Spotify, X, Home Assistant, etc.) — no requieren acción.
 
