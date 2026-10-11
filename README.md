@@ -22,11 +22,11 @@ Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo pa
 |---|---|
 | Máquina | PC con **Windows 11 + WSL2** (Ubuntu real, disco `D:`) — migrado desde Linux Mint en la Fase 5 |
 | Método de despliegue | Docker (dentro de la Ubuntu de WSL2), imagen oficial `nousresearch/hermes-agent` |
-| Proveedor de modelo (LLM) | NVIDIA NIM (`nvidia/nemotron-3-ultra-550b-a55b`) |
-| Canal de comunicación | Telegram (bot "Leonardo", `@hermes_asiste_bot`) |
-| Sub-agentes (skills) | `coder`, `oficina` (delegación vía `delegate_task` desde `SOUL.md`) |
-| Dashboard web | Puerto 9119, accesible por WiFi local y por Tailscale |
-| Automatizaciones activas | 3 recordatorios de clase (Lun/Mar/Mié) + 2 de tutoría Infotec |
+| Proveedor de modelo (LLM) | NVIDIA NIM (`nvidia/nemotron-3-ultra-550b-a55b`) como principal; Google Gemini (`gemini-3.5-flash-lite`) como respaldo y para las tareas auxiliares |
+| Canales de comunicación | Telegram (bot "Leonardo", `@hermes_asiste_bot`), CLI y panel web — WhatsApp retirado en la Fase 10 |
+| Sub-agentes (skills) | `coder`, `oficina` (delegación vía `delegate_task` desde `SOUL.md`), `pendientes-trabajo` |
+| Dashboard web | Puerto 9119, solo accesible desde la propia PC (`127.0.0.1`) desde la Fase 10 |
+| Automatizaciones activas | 3 recordatorios de clase (Lun/Mar/Mié) + aviso diario de pendientes de trabajo (9:00 am) |
 
 ## Índice de fases
 
@@ -40,6 +40,7 @@ Este repositorio sirve como **bitácora de portafolio** (evidencia de trabajo pa
 - [`07-pendientes-trabajo.md`](07-pendientes-trabajo.md) — Lista de pendientes de trabajo con memoria persistente y aviso diario.
 - [`08-whatsapp-y-notificaciones.md`](08-whatsapp-y-notificaciones.md) — Conexión de WhatsApp como canal adicional y diagnóstico de notificaciones.
 - [`09-incidente-proveedor-y-memoria.md`](09-incidente-proveedor-y-memoria.md) — Caída del proveedor de LLM, migración a otro proveedor y limpieza de memoria.
+- [`10-diagnostico-y-estabilizacion.md`](10-diagnostico-y-estabilizacion.md) — Regreso a Nemotron (`base_url` incorrecta), tareas auxiliares, Mixture of Agents, puertos restringidos a localhost y retiro de WhatsApp.
 
 > ⚠️ **Nota histórica:** las Fases 0-4 se hicieron originalmente sobre Linux Mint. La Fase 5 documenta la migración completa a Windows + WSL2, incluyendo la reconstrucción de Hermes desde cero (se perdió la memoria/configuración anterior por un backup mal ejecutado — lección documentada en esa fase). El entorno **actual y vigente** del proyecto es Windows + WSL2.
 
@@ -50,6 +51,7 @@ Este repositorio es una bitácora en Markdown, no una aplicación por sí misma.
 1. Sigue [`01-prerrequisitos-y-docker.md`](01-prerrequisitos-y-docker.md) para instalar Docker sobre Linux o WSL2.
 2. Sigue [`02-instalar-hermes-openrouter.md`](02-instalar-hermes-openrouter.md) para instalar el [Hermes Agent](https://github.com/NousResearch/hermes-agent) oficial de Nous Research dentro de Docker.
 3. Continúa con las fases siguientes en orden según lo que quieras reproducir (sub-agentes, cron jobs, WhatsApp, persistencia en WSL2, etc.).
+4. Para el comando `docker run` vigente (puertos restringidos a localhost), usa el de la Fase 10.
 
 ## Cómo configurarlo
 
