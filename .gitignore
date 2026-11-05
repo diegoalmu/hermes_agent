@@ -1,0 +1,19 @@
+.obsidian/core-plugins.json
+.obsidian/workspace.json
+.obsidian/app.json
+.obsidian/appearance.json
+.obsidian/
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Nunca subir configuración real de Hermes (tokens, IDs, .env)
+.env
+.hermes/
+
+# Notas locales no publicadas
+11-demian-heartbeat-mensaje-repetido.md
